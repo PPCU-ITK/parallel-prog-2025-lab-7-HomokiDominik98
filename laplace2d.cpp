@@ -4,10 +4,13 @@
 #include <stdio.h>
 #include <chrono>
 #include <iostream>
-
+// module load nvhpc
+// nvc++ -mp=gpu -gpu=cc80 -Ofast laplace2d.cpp -o laplace -Minfo=accel,mp
+// srun -p gpu --gres=gpu:1 --ntasks=1 --time=00:05:00 --mem=40G  ./laplace
 
 int main(int argc, const char** argv)
 {
+  // Try out different doubled sizes and iterations
   //Size along y
   int jmax = 4096;
   //Size along x
@@ -96,3 +99,8 @@ int main(int argc, const char** argv)
 
   return 0;
 }
+
+
+// CC cachetest.cpp -Ofast -o cachetest -fopenmp
+//  srun -p cpu --ntasks=1 --time=00:05:00 --mem=20G --reservation=p_es_itkpp_203 --cpus-per-task=4 ./cachetest
+// srun -p cpu --ntasks=1 --time=00:05:00 --mem=20G --cpus-per-task=4 ./cachetest
